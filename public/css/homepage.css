@@ -1,0 +1,97 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif:wght@400;600&family=Oswald:wght@600&display=swap');
+* {
+    box-sizing: border-box;
+}
+
+body {
+    padding: 0;
+    margin: 0;
+    font-family: 'Oswald', sans-serif;
+    font-size: 1rem;
+}
+
+.main-header {
+    width: 100%;
+    height: 3.5rem;
+    background-color: pink;
+    padding: 0 1.5rem;
+    display: flex;
+    align-items: center;
+}
+
+.main-header__nav {
+    height: 100%;
+    width: 100%;
+    display: none;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.main-header__item-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+}
+
+.main-header__item {
+    margin: 0 1rem;
+    padding: 0;
+}
+
+.main-header__item a,
+.main-header__item button {
+    font: inherit;
+    background: transparent;
+    border: none;
+    text-decoration: none;
+    color: white;
+    cursor: pointer;
+}
+
+.main-header__item a:hover,
+.main-header__item a:active,
+.main-header__item a.active,
+.main-header__item button:hover,
+.main-header__item button:active {
+    color: skyblue;
+}
+
+@media (min-width: 768px) {
+    .main-header__nav {
+        display: flex;
+    }
+    #side-menu-toggle {
+        display: none;
+    }
+    .user-message {
+        width: 30rem;
+    }
+}
+
+#authbtn {
+    background-color: transparent;
+    color: black;
+    border-radius: 8px;
+    text-decoration: none;
+    border: none;
+    transition: color 200ms, background-color 1s;
+    padding: auto;
+    margin-right: 1.5rem;
+}
+
+#authbtn:hover {
+    color: white;
+    background-image: linear-gradient(to right, #0344ab, #327ffa);
+}
+
+.main-header__item:hover .svg {
+    transform: rotate(180deg);
+    color: #0344ab;
+}
+
+.svg {
+    display: inline;
+    transform: rotate(0deg);
+    transition: transform 250ms ease;
+}
