@@ -28,4 +28,4 @@ const sellerSchema = new Schema({
     resetTokenExpiration: Date,
 });
 
-module.export = mongoose.models(Seller, 'sellerSchema');
+module.export = mongoose.model(Seller, 'sellerSchema');
