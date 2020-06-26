@@ -31,7 +31,11 @@ exports.postLogin = (req,res,next)=>{
    })
         
 })
-    .catch(err=>console.log(err));
+    .catch(err=>{
+        const error = new Error(err);
+        error.httpStatusCode =500;
+        return next(error);
+    });
 
 }
 
@@ -53,5 +57,9 @@ exports.postSignup = (req,res,next)=>{
    .then(result=>{
     console.log(result)
      return res.send("SIGNED UP SUCCESSFULLY")})
-   .catch(err=>console.log(err));
+   .catch(err=>{
+    const error = new Error(err);
+    error.httpStatusCode =500;
+    return next(error);
+});
 }

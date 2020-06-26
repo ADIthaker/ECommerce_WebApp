@@ -7,6 +7,7 @@ const mongodbstore = require('connect-mongodb-session')(session);
 const csrf = require('csurf');
 const mongoose = require('mongoose');
 const User = require('./models/user');
+const errorController=require('./controllers/errors');
 
 const MONGODB_URI = "mongodb+srv://Aditya:AoM18W3BFXbQ8ehG@cluster0-cws37.mongodb.net/test?retryWrites=true&w=majority";
 
@@ -56,12 +57,16 @@ app.use((req, res, next) => {
 
 app.use(shopRoutes);
 app.use(authRoutes);
+app.use('/500',errorController.get505);
+app.use(errorController.get404);
 
-
-app.use((req, res, next) => {
-    res.status(404).render('404.ejs');
-});
-
+app.use((error,req,res,next)=>{
+    res.status(500).render('500', {
+        pageTitle: "Error!",
+        // path: '/500',
+        // isAuthenticated: req.session.isLoggedIn,
+    });
+})
 
 
 
