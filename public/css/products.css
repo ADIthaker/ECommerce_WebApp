@@ -1,0 +1,21 @@
+.main_sidebar{
+    width:20%;
+    height: 800px;
+    background-color: blue;
+    display:flex;
+    flex-direction:column ;
+    padding: 0 1rem;
+    margin-right: 2vh;
+}
+.filter_for_reviews{
+    margin : 1rem  1.5rem;
+    padding : 5px;  
+    list-style: none;
+    float:left;
+}
+.filter_for_location{
+    margin : 1rem  1.5rem;
+    padding : 5px; 
+    list-style: none;
+    float:left;
+}

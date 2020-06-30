@@ -63,3 +63,7 @@ exports.postSignup = (req,res,next)=>{
     return next(error);
 });
 }
+
+exports.getSellerId=(req,res,next)=>{
+    
+}

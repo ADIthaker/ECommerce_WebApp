@@ -1,0 +1,70 @@
+.mat.container {
+    margin:1rem 0;
+    width: 50%;
+    
+    max-width: 800px;
+  }
+  body{
+      background-color: white;
+  }
+  #map {
+    height: 70vh;
+    margin-bottom: 10px;
+    display: none;
+  }
+  
+  #locationList .card {
+    padding: 10px;
+    background-color: seashell;
+  }
+  
+  #toast-container {
+    top: 50%;
+    bottom: unset;
+  }
+  .btn{
+      position: relative;
+      left:50%;
+      margin:30px auto;
+      width:100px;
+      align-items: center;
+      transform: translate(-50%, -50%);
+  }
+  
+  .mat.toast {
+    background-color: rgba(0, 0, 0, 0.8);
+  }
+  
+  @media only screen and (max-width: 768px) {
+    .mat.container {
+      width: 80%;
+    }
+  }
+  .mygrid{
+      display: grid;
+      grid-template-columns: 70% 60%;
+      grid-gap:10px;
+      margin: 1.5rem  1rem;
+  }
+  .grid-item1{
+     align-items: center;
+     
+  }
+  .grid-item2{
+    width:50%;
+    height:100vh;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    background-color: seashell;
+ }
+ .title{
+     margin:1.75rem;
+ }
+ #shippingAddress{
+    padding: 10px 20px;
+    
+ }
+
+ hr {
+     width : 95%;
+     align-items: center;
+ }

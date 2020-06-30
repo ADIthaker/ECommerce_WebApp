@@ -10,7 +10,7 @@ body {
     font-size: 1rem;
 }
 
-.main-header {
+.main-hdr #this{
     width: 100%;
     height: 3.5rem;
     background-color: pink;
@@ -19,28 +19,29 @@ body {
     align-items: center;
 }
 
-.main-header__nav {
+.main-hdr__nav{
     height: 100%;
     width: 100%;
     display: none;
+    background-color: pink;
     align-items: center;
     justify-content: space-between;
 }
 
-.main-header__item-list {
+.main-hdr__item-lst {
     list-style: none;
     margin: 0;
     padding: 0;
     display: flex;
 }
 
-.main-header__item {
+.main-hdr__item {
     margin: 0 1rem;
     padding: 0;
 }
 
-.main-header__item a,
-.main-header__item button {
+.main-hdr__item a,
+.main-hdr__item button {
     font: inherit;
     background: transparent;
     border: none;
@@ -48,17 +49,49 @@ body {
     color: white;
     cursor: pointer;
 }
+.dropdowm-cnt{
+    display: none;
+    position: absolute;
+    z-index: 1;     
+    background-color: white;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    min-width: 200px;   
+}
+.main-hdr__item .dropdowm {
+    display: inline-block;
+  }
+  .main-hdr__item a,.dropbtm {
+    display: inline-block;
+    color: white;
+    text-align: center;
+    padding: 14px 14px;
+    text-decoration: none;
+  }
+  .dropdowm:hover .dropdowm-cnt {
+    display: block;
+  }
+   .dropdowm:hover .dropbtm  {
+    background-color: #f03c4e;
+  }
+  .dropdowm-cnt a:hover {background-color: #f1f1f1;}
+  .dropdowm-cnt a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    text-align: left;
+  }  
 
-.main-header__item a:hover,
-.main-header__item a:active,
-.main-header__item a.active,
-.main-header__item button:hover,
-.main-header__item button:active {
+.main-hdr__item a:hover,
+.main-hdr__item a:active,
+.main-hdr__item a.active,
+.main-hdr__item button:hover,
+.main-hdr__item button:active {
     color: skyblue;
 }
 
 @media (min-width: 768px) {
-    .main-header__nav {
+    .main-hdr__nav {
         display: flex;
     }
     #side-menu-toggle {
@@ -85,7 +118,7 @@ body {
     background-image: linear-gradient(to right, #0344ab, #327ffa);
 }
 
-.main-header__item:hover .svg {
+.main-hdr__item:hover .svg {
     transform: rotate(180deg);
     color: #0344ab;
 }

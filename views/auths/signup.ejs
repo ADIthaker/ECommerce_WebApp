@@ -1,25 +1,61 @@
 <%- include('../includes/head.ejs') %>
-<link rel="stylesheet" href="/css/login_styles.css">
+<link rel="stylesheet" href="/css/map-form.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"> 
+
+
 </head>
-<body>
+<body onload="getLocation()">
     <%- include('../includes/navigations.ejs') %>
-    <main class="shadow-main" >  
-        <div class="form"> 
-            <form action="/signup" method="POST">
-            <div class="field">
-             <input type="email" name="email" class="input" autocomplete="off" spellcheck="false"/>
-             <label for="email"  class="label">Email</label>
-            </div>
-            <div class="field">
-             <input type="password" name="password" class="input" spellcheck="false" id="pass"/>
-             <label for="password" class="label">Password</label>
-         </div> 
-         <button type="submit">Sign Up</button>
-         </form>
+<div class="title"><h3>Sign Up</h3> </div>
+ <hr>
+<div class="mygrid">
+      <div class="grid-item1" id="target">
+      <div id="map" >
+      </div>
+      <button id="showMe" class="btn red-lighten-4">Use My Location</button>
+      <div id="locationList"></div>
+      </div>
+    <div class="grid-item2">
+      <form id="shippingAddress" method="POST" >
+        <br>
+        <div class="input-field">
+            <input class="input_fields"  type="text" name="fullname" autocomplete="off">
+            <label class="active" for="city">Full Name</label>
+          </div>
+          <div class="input-field">
+            <input class="input_fields"  type="email" name="email" autocomplete="off">
+            <label class="active" for="city">Email</label>
+          </div>
+          <div class="input-field">
+            <input class="input_fields"  type="password" name="password" autocomplete="off">
+            <label class="active" for="city">Password</label>
+          </div>
+        <div class="input-field">
+          <textarea class="input_fields materialize-textarea" id="address" type="text" autocomplete="off"></textarea>
+          <label class="active" for="address">Address</label>
+        </div>
+        <div class="input-field">
+          <input class="input_fields" id="city" type="text" autocomplete="off">
+          <label class="active" for="city">City/District/Town</label>
         </div>
         
-    </main>
-    
+        <div class="input-field">
+          <input class="input_fields" id="postal_code" type="text" autocomplete="off">
+          <label class="active" for="pin_code">Pin Code</label>
+        </div>
+        <div class="input-field">
+          <input class="input_fields" id="state" type="text" autocomplete="off">
+          <label class="active" for="State">State</label>
+        </div>
+        <input id="lat" type="hidden" name="lat" >
+        <input id="long"  type="hidden" name="long">
+        <button id="signup" class="btn red lighten-3" type="submit">Sign Up</button>
+      </form>
+    </div>
+</div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBpv2swN80DWLD8U7ggxVHEwd0Ctzzm6FE"></script>
+    <script src="/javascript/map-main.js"></script>
     
 
 </body>

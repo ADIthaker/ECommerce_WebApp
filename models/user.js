@@ -26,5 +26,16 @@ const userSchema = new Schema({
     },
     resetToken: String,
     resetTokenExpiration: Date,
+    cart:{
+        items:[
+            {productId:{type: mongoose.SchemaTypes.ObjectId,
+                ref:"Product",
+                required: true},
+            quantity:{
+                type:Number,required:true
+            }
+            }
+        ]
+    }
 });
 module.exports = mongoose.model("User",userSchema);

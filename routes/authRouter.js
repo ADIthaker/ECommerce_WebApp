@@ -12,6 +12,7 @@ router.get('/signup',Auth.getSignup);
 
 router.post('/signup',Auth.postSignup);
 
+router.get('/newselller',Auth.getSellerId);
 
 
 module.exports = router;
