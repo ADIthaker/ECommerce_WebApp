@@ -6,24 +6,40 @@
                 <a href="/">Famer's Market</a>
             </li>
             <li class="main-hdr__item dropdowm">
+                <% if (!isAuthenticatedSeller){ %>
                 <a href="/products" class="dropbtm">Categories <img src="/images/line-angle-down.svg" height="10px" width="25px" class="svg"></a>
                 <div class="dropdowm-cnt">
                     <a href="#" >Freshest Now</a>
                     <a href="#" >Most Reliable</a>
                     <a href="#" >Lowest Prices</a>
-                   </div> 
+                   </div>           
             </li>
+            <% } else { %>
+                <li class="main-hdr__item">
+                    <a href="#">Add Products</a>
+                </li>
+            <li class="main-hdr__item">
+                <a href="#">Admin Products</a>
+            </li>
+            
+            <% } %>
         </ul>
         <ul class="main-hdr__item-lst">
             <li class="main-hdr__item dropdowm">
                 <a  class="dropbtm">More <img src="/images/line-angle-down.svg" height="10px" width="20px" class="svg"></a>
                 <div class="dropdowm-cnt">
-                    <a href="#" >Link 1</a>
+                    <% if (!isAuthenticatedSeller){ %>
+                    <a href="/loginseller" >Log In to shop</a>
                     <a href="/newseller">Set Up shop</a>
-                    <a href="/" >Bruh</a>
+                    <% } else { %>
+                        <li class="main-hdr__item">
+                            <form action="/userlogout" method="POST">
+                            <button type="submit" style="padding: 14px 14px;">Logout</button>
+                         </form>
+                    <% } %>
                    </div> 
             </li>
-            <% if (!isAuthenticated){ %>
+            <% if (!isAuthenticatedUser && !isAuthenticatedSeller){ %>
             <li class="main-hdr__item">
                 <a href="/login">Login</a>
             </li>
@@ -31,16 +47,18 @@
                 <a href="/signup">Signup</a>
             </li>
             
-            <% } else { %>
+            <% } else if(isAuthenticatedUser && !isAuthenticatedSeller) { %>
                 <li class="main-hdr__item">
-                   <form action="/logout" method="POST">
+                   <form action="/userlogout" method="POST">
                    <button type="submit" style="padding: 14px 14px;">Logout</button>
                 </form>
                 </li>
-                <% } %>
+                 <% } %>
+                 <% if (!isAuthenticatedSeller && isAuthenticatedUser ){ %>       
             <li class="main-hdr__item">
                 <a href="/cart">Cart</a>
             </li>
+            <% } %>
 
 
         </ul>

@@ -12,7 +12,14 @@ router.get('/signup',Auth.getSignup);
 
 router.post('/signup',Auth.postSignup);
 
-router.post('/logout',Auth.postLogout);
+router.post('/userlogout',Auth.postLogout);
 
+router.get('/newseller',Auth.getSellerSignUp);
+
+router.post('/newseller',Auth.postSellerSignup);
+
+router.get('/loginseller',Auth.getSellerLogIn); 
+
+router.post('/loginseller',Auth.postSellerLogIn);
 
 module.exports = router;

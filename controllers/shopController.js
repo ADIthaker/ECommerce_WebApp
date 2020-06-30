@@ -5,11 +5,13 @@ const ITEMS_PER_PAGE=15;
 
 exports.getProducts = (req,res,next)=>{
    res.render('shop/products',{
-      isAuthenticated:req.session.isLoggedIn,
+      isAuthenticatedUser: req.session.isLoggedIn,
+      isAuthenticatedSeller:req.session.isSellerLoggedIn,
    });
 }
 exports.getHome=(req, res, next) => {
    res.render('homepage',{
-       isAuthenticated:req.session.isLoggedIn,
+       isAuthenticatedUser:req.session.isLoggedIn,
+       isAuthenticatedSeller:req.session.isSellerLoggedIn,
     });
 }
