@@ -46,10 +46,26 @@ exports.getSignup =(req,res,next)=>{
 exports.postSignup = (req,res,next)=>{
    const email=req.body.email;
    const pwd =req.body.password;
+   const lat = req.body.lat;
+   const long =req.body.long;
+   const state =req.body.state;
+   const name =req.body.fullname;
+   const city = req.body.city;
+   const address =req.body.address;
+   const pincode =req.body.pin_code;
    bcrypt.hash(pwd,12).then(hashedPwd=>{
       const user = new User({
+          name:name,
            email:email,
            password:hashedPwd,
+           location:{
+               type:'Point',
+               coordinates:[long,lat]
+           },
+           Address:address,
+           City:city,
+           State:state,
+           PinCode:pincode
        });
        return user.save();
 
@@ -58,6 +74,7 @@ exports.postSignup = (req,res,next)=>{
     console.log(result)
      return res.send("SIGNED UP SUCCESSFULLY")})
    .catch(err=>{
+       console.log(err);
     const error = new Error(err);
     error.httpStatusCode =500;
     return next(error);

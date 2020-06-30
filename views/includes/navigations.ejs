@@ -29,12 +29,14 @@
                     <a href="#" >Logout</a>
                    </div> 
             </li>
+            <% if (isAuthenticated == false){ %>
             <li class="main-hdr__item">
                 <a href="/login">Login</a>
             </li>
             <li class="main-hdr__item">
                 <a href="/signup">Signup</a>
             </li>
+            <% } %>
             <li class="main-hdr__item">
                 <a href="/cart">Cart</a>
             </li>

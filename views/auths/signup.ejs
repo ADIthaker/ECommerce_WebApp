@@ -22,6 +22,7 @@
             <input class="input_fields"  type="text" name="fullname" autocomplete="off">
             <label class="active" for="city">Full Name</label>
           </div>
+         
           <div class="input-field">
             <input class="input_fields"  type="email" name="email" autocomplete="off">
             <label class="active" for="city">Email</label>
@@ -31,20 +32,20 @@
             <label class="active" for="city">Password</label>
           </div>
         <div class="input-field">
-          <textarea class="input_fields materialize-textarea" id="address" type="text" autocomplete="off"></textarea>
+          <textarea class="input_fields materialize-textarea" id="address" type="text" autocomplete="off"  name="address"></textarea>
           <label class="active" for="address">Address</label>
         </div>
         <div class="input-field">
-          <input class="input_fields" id="city" type="text" autocomplete="off">
+          <input class="input_fields" id="city" type="text" name="city" autocomplete="off">
           <label class="active" for="city">City/District/Town</label>
         </div>
         
         <div class="input-field">
-          <input class="input_fields" id="postal_code" type="text" autocomplete="off">
+          <input class="input_fields" id="postal_code" type="text"  name="pin_code" autocomplete="off">
           <label class="active" for="pin_code">Pin Code</label>
         </div>
         <div class="input-field">
-          <input class="input_fields" id="state" type="text" autocomplete="off">
+          <input class="input_fields" id="state"  name="state" type="text" autocomplete="off">
           <label class="active" for="State">State</label>
         </div>
         <input id="lat" type="hidden" name="lat" >
@@ -57,6 +58,6 @@
     <script  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBpv2swN80DWLD8U7ggxVHEwd0Ctzzm6FE"></script>
     <script src="/javascript/map-main.js"></script>
     
-
+ 
 </body>
 </html>

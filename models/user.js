@@ -1,25 +1,25 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 const userSchema = new Schema({
-    // name:{
-    //     type:String,
-    //     required:true
-    // },
+    name:{
+        type:String,
+        required:true
+    },
     email:{
         type:String,
         required:true
     },
-    // location: {
-    //     type: {
-    //         type: String,
-    //         enum: ["Point"],
-    //         required: true
-    //     },
-    //     coordinates: {
-    //         type: [Number],
-    //         required: true
-    //     }
-    // },
+    location: {
+        type: {
+            type: String,
+            enum: ["Point"],
+            required: true
+        },
+        coordinates: {
+            type: [Number],
+            required: true
+        }
+    },
     password:{
         type:String,
         required:true
@@ -36,6 +36,23 @@ const userSchema = new Schema({
             }
             }
         ]
+    },
+    Address:{
+        type:String,
+        required:true
+    },
+    City:{
+        type:String,
+        required:true
+    },
+    State:{
+        type:String,
+        required:true
+    },
+    PinCode:{
+        type:String,
+        required:true
     }
+
 });
 module.exports = mongoose.model("User",userSchema);
