@@ -13,12 +13,6 @@
                     <a href="#" >Lowest Prices</a>
                    </div> 
             </li>
-            
-
-
-
-
-
         </ul>
         <ul class="main-hdr__item-lst">
             <li class="main-hdr__item dropdowm">
@@ -26,17 +20,24 @@
                 <div class="dropdowm-cnt">
                     <a href="#" >Link 1</a>
                     <a href="/newseller">Set Up shop</a>
-                    <a href="#" >Logout</a>
+                    <a href="/" >Bruh</a>
                    </div> 
             </li>
-            <% if (isAuthenticated == false){ %>
+            <% if (!isAuthenticated){ %>
             <li class="main-hdr__item">
                 <a href="/login">Login</a>
             </li>
             <li class="main-hdr__item">
                 <a href="/signup">Signup</a>
             </li>
-            <% } %>
+            
+            <% } else { %>
+                <li class="main-hdr__item">
+                   <form action="/logout" method="POST">
+                   <button type="submit" style="padding: 14px 14px;">Logout</button>
+                </form>
+                </li>
+                <% } %>
             <li class="main-hdr__item">
                 <a href="/cart">Cart</a>
             </li>

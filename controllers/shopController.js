@@ -8,3 +8,8 @@ exports.getProducts = (req,res,next)=>{
       isAuthenticated:req.session.isLoggedIn,
    });
 }
+exports.getHome=(req, res, next) => {
+   res.render('homepage',{
+       isAuthenticated:req.session.isLoggedIn,
+    });
+}

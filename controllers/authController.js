@@ -1,10 +1,12 @@
 const express = require('express');
 const User = require('../models/user');
 const bcrypt = require('bcryptjs');
-
+const session = require('express-session');
 
 exports.getLogin = (req,res,next)=>{
-    return res.render('auths/login');
+    return res.render('auths/login',{
+        isAuthenticated:req.session.isLoggedIn,
+     });
 }
 
 exports.postLogin = (req,res,next)=>{
@@ -27,7 +29,9 @@ exports.postLogin = (req,res,next)=>{
             res.redirect('/');;
        });
        }
-       return res.render('auths/login');
+       return res.render('auths/login',{
+        isAuthenticated:req.session.isLoggedIn,
+     });
    })
         
 })
@@ -40,7 +44,9 @@ exports.postLogin = (req,res,next)=>{
 }
 
 exports.getSignup =(req,res,next)=>{
-    return res.render('auths/signup');
+    return res.render('auths/signup',{
+        isAuthenticated:req.session.isLoggedIn,
+     });
 }
 
 exports.postSignup = (req,res,next)=>{
@@ -72,15 +78,22 @@ exports.postSignup = (req,res,next)=>{
    })
    .then(result=>{
     console.log(result)
-     return res.send("SIGNED UP SUCCESSFULLY")})
-   .catch(err=>{
-       console.log(err);
-    const error = new Error(err);
-    error.httpStatusCode =500;
-    return next(error);
+     return res.redirect('/',{
+        isAuthenticated:req.session.isLoggedIn,
+     })
+   
+}).catch(err=>{
+    console.log(err);
+ const error = new Error(err);
+ error.httpStatusCode =500;
+ return next(error);;
 });
 }
 
-exports.getSellerId=(req,res,next)=>{
-    
+
+exports.postLogout=(req,res,next)=>{
+    req.session.destroy(err => {
+        console.log(err);
+        res.redirect('/');
+      });
 }
