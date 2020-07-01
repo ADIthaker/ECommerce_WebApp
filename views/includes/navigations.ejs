@@ -1,41 +1,47 @@
 <div class="backdrop"></div>
 <header class="main-hdr" id="this">
     <div class="main-hdr__nav special-nav">
+       
         <ul class="main-hdr__item-lst">
             <li class="main-hdr__item">
-                <a href="/">Famer's Market</a>
+                <a href="/">eMarket</a>
             </li>
+
             <li class="main-hdr__item dropdowm">
                 <% if (!isAuthenticatedSeller){ %>
-                <a href="/products" class="dropbtm">Categories <img src="/images/line-angle-down.svg" height="10px" width="25px" class="svg"></a>
+                <a href="/products" class="dropbtm">Categories <img src="/html-images/line-angle-down.svg" height="10px" width="25px" class="svg"></a>
                 <div class="dropdowm-cnt">
                     <a href="#" >Freshest Now</a>
                     <a href="#" >Most Reliable</a>
                     <a href="#" >Lowest Prices</a>
                    </div>           
             </li>
+           
             <% } else { %>
                 <li class="main-hdr__item">
-                    <a href="#">Add Products</a>
+                    <a href="/admin/add-product">Add Products</a>
                 </li>
             <li class="main-hdr__item">
                 <a href="#">Admin Products</a>
             </li>
-            
+           
             <% } %>
         </ul>
         <ul class="main-hdr__item-lst">
             <li class="main-hdr__item dropdowm">
-                <a  class="dropbtm">More <img src="/images/line-angle-down.svg" height="10px" width="20px" class="svg"></a>
+                <a  class="dropbtm">More <img src="/html-images/line-angle-down.svg" height="10px" width="20px" class="svg"></a>
                 <div class="dropdowm-cnt">
                     <% if (!isAuthenticatedSeller){ %>
                     <a href="/loginseller" >Log In to shop</a>
                     <a href="/newseller">Set Up shop</a>
+                   
                     <% } else { %>
                         <li class="main-hdr__item">
                             <form action="/userlogout" method="POST">
+                                <input type="hidden" name="_csrf" value= "<%= csrfToken %>" />
                             <button type="submit" style="padding: 14px 14px;">Logout</button>
                          </form>
+                        
                     <% } %>
                    </div> 
             </li>
@@ -46,21 +52,25 @@
             <li class="main-hdr__item">
                 <a href="/signup">Signup</a>
             </li>
-            
+           
             <% } else if(isAuthenticatedUser && !isAuthenticatedSeller) { %>
                 <li class="main-hdr__item">
                    <form action="/userlogout" method="POST">
+                    <input type="hidden" name="_csrf" value= "<%= csrfToken %>" />
                    <button type="submit" style="padding: 14px 14px;">Logout</button>
                 </form>
                 </li>
+               
                  <% } %>
                  <% if (!isAuthenticatedSeller && isAuthenticatedUser ){ %>       
             <li class="main-hdr__item">
                 <a href="/cart">Cart</a>
             </li>
+           
             <% } %>
 
 
+            <form><input type="hidden" name="_csrf" value="<%= csrfToken %>"></form>
         </ul>
     </div>
 </header>

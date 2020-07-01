@@ -14,13 +14,22 @@ const productSchema = new Schema({
         required: true
     },
     imageUrl: {
-        type: String,
+        type: [String],
         required: true
     },
     description: {
         type: String,
         required: true
+    },
+    costPrice:{
+        type:Number,
+        requried:true
+    },
+    availability:{
+        type:Number,
+        requried:true
     }
+    
     
 });
 module.exports= mongoose.model("Product", productSchema);

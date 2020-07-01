@@ -49,8 +49,11 @@
           <label class="active" for="State">State</label>
         </div>
         <input id="lat" type="hidden" name="lat" >
+        
         <input id="long"  type="hidden" name="long">
+        <input type="hidden" name="_csrf" value="<%= csrfToken %>">
         <button id="signup" class="btn red lighten-3" type="submit">Sign Up</button>
+
       </form>
     </div>
 </div>

@@ -5,9 +5,10 @@ const bcrypt = require('bcryptjs');
 const session = require('express-session');
 
 exports.getLogin = (req,res,next)=>{
-    return res.render('auths/login',{
+    res.render('auths/login',{
         isAuthenticatedUser:req.session.isLoggedIn,
         isAuthenticatedSeller : req.session.isSellerLoggedIn,
+        csrfToken:req.csrfToken()
         
      });
 }
@@ -17,6 +18,7 @@ exports.postLogin = (req,res,next)=>{
     const password = req.body.password;
     User.findOne({email:email})
     .then(user=>{
+      
    if (!user){
       return  res.send("Invalid!!!");
    }
@@ -35,13 +37,14 @@ exports.postLogin = (req,res,next)=>{
        return res.render('auths/login',{
         isAuthenticatedUser:req.session.isLoggedIn,
         isAuthenticatedSeller : req.session.isSellerLoggedIn,
+        csrfToken:req.csrfToken()
      });
    })
         
 })
     .catch(err=>{
         const error = new Error(err);
-        error.httpStatusCode =500;
+        error.httpStatusCode=500;
         return next(error);
     });
 
@@ -51,6 +54,7 @@ exports.getSignup =(req,res,next)=>{
     return res.render('auths/signup',{
         isAuthenticatedUser:req.session.isLoggedIn,
         isAuthenticatedSeller : req.session.isSellerLoggedIn,
+        csrfToken:req.csrfToken()
      });
 }
 
@@ -86,10 +90,11 @@ exports.postSignup = (req,res,next)=>{
      return res.redirect('/',{
         isAuthenticatedUser:req.session.isLoggedIn,
         isAuthenticatedSeller : req.session.isSellerLoggedIn,
+        csrfToken:req.csrfToken()
      })
    
 }).catch(err=>{
-    console.log(err);
+console.log(err);
  const error = new Error(err);
  error.httpStatusCode =500;
  return next(error);;
@@ -98,7 +103,7 @@ exports.postSignup = (req,res,next)=>{
 
 
 exports.postLogout=(req,res,next)=>{
-    req.session.destroy(err => {
+   return req.session.destroy(err => {
         console.log(err);
         res.redirect('/');
       });
@@ -108,6 +113,7 @@ exports.getSellerSignUp = (req,res,next)=>{
         res.render('auths/sellersignup',{
             isAuthenticatedUser:req.session.isLoggedIn,
             isAuthenticatedSeller : req.session.isSellerLoggedIn,
+            csrfToken:req.csrfToken()
         })
 }
 exports.postSellerSignup = (req,res,next)=>{
@@ -152,7 +158,7 @@ exports.getSellerLogIn=(req,res,next)=>{
     res.render('auths/loginseller',{
         isAuthenticatedSeller : req.session.isSellerLoggedIn,
         isAuthenticatedUser:req.session.isLoggedIn,
-       
+        csrfToken:req.csrfToken()
     });
 }
 
@@ -179,7 +185,7 @@ exports.postSellerLogIn = (req,res,next)=>{
        }
        return res.render('auths/loginseller',{
         isAuthenticatedUser:req.session.isLoggedIn,
-        isAuthenticatedSeller : req.session.isSellerLoggedIn,
+        isAuthenticatedSeller : req.session.isSellerLoggedIn, csrfToken:req.csrfToken()
      });
    })
 })

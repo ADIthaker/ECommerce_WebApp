@@ -1,22 +1,28 @@
 <%- include('../includes/head.ejs') %>
 <link rel="stylesheet" href="/css/login_styles.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"> 
 </head>
 <body>
     <%- include('../includes/navigations.ejs') %>
-    <h3> seller</h3>
+ 
     <main class="shadow-main" >  
-        <div class="form"> 
+        <div class="container"> 
+            <h4 class="titleseller">Login to your seller account</h4>
             <form action="/loginseller" method="POST">
-            <div class="field">
-             <input type="email" name="email" class="input" autocomplete="off" spellcheck="false"/>
+            <div class="input-field">
+             <input type="email" name="email" class="validate" autocomplete="off" id='email' spellcheck="false"/>
              <label for="email"  class="label">Email</label>
             </div>
-            <div class="field">
-             <input type="password" name="password" class="input" spellcheck="false" id="pass"/>
-             <label for="password" class="label">Password</label>
+            <div class="input-field">
+             <input type="password" name="password" class="validate" spellcheck="false" id="pass"/>
+             <label for="pass" class="label">Password</label>
          </div> 
-         <button type="submit">Login</button>
+         <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+         <button type="submit" class="btn orange darken-2">Login</button>
          </form>
         </div>
         
     </main>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+</body>
+</html

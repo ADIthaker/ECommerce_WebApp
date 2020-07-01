@@ -9,8 +9,9 @@ const mongoose = require('mongoose');
 const User = require('./models/user');
 const Seller = require('./models/seller');
 const errorController=require('./controllers/errorController');
-
 const MONGODB_URI = "mongodb+srv://Aditya:AoM18W3BFXbQ8ehG@cluster0-cws37.mongodb.net/test?retryWrites=true&w=majority";
+const multer = require('multer');
+const flash = require('connect-flash');
 
 app.set('view engine', 'ejs');
 const store = new mongodbstore({
@@ -18,18 +19,31 @@ const store = new mongodbstore({
     collection: 'sessions',
 });
 
-const csrfProtection = csrf();
 
 
+const fileStorage = multer.diskStorage({
+    destination: (req, file, cb) => {
+        cb(null, 'images');
+    },
+    filename: (req, file, cb) => {
+        cb(null, `${new Date().toISOString().replace(/:/g, '-')}${file.originalname.split(" ").join("_")}`);
+    },
+});
+
+const fileFilter = (req, file, cb) => {
+    if (file.mimetype === 'image/png' || file.mimetype === 'image/jpg' ||
+        file.mimetype === 'image/jpeg') {
+        cb(null, true);
+    } else {
+        cb(null, false);
+    }
+
+}
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(bodyparser.urlencoded({extended:false}));
-
-const shopRoutes = require('./routes/shopRouter');
-const authRoutes = require('./routes/authRouter');
+app.use(multer({ storage: fileStorage, fileFilter: fileFilter}).array('image',2));
 
 
-
-// all this shit has to be moved up
 app.use(
     session({ 
 secret: 'my secret',
@@ -37,23 +51,23 @@ resave: false,
 saveUninitialized: false,
 store: store,
 }));
+const csrfProtection = csrf();
+app.use(csrfProtection);
+
+
+const shopRoutes = require('./routes/shopRouter');
+const authRoutes = require('./routes/authRouter');
+const adminRoutes = require('./routes/adminRouter');
+
 app.use((req, res, next) => {
     if (!req.session.user) {
         return next();
     }
-    User.findById(req.session.user._id)
-        .then(user => {
-            if (!user) {
-                Seller.findById(req.session.seller._id)
-                .then(seller=>{
-                    if(!seller) {
-                         return next();
-                    }
-                    req.seller=seller;
-                    next();
-                })
+User.findById(req.session.user._id)
+.then(user => {
+            if(!user){
                 return next();
-            }
+        }
             req.user = user;
             next();
         })
@@ -63,22 +77,36 @@ app.use((req, res, next) => {
     
 });
 //have to move this above all reqs 
-
-
-
-app.use(shopRoutes);
+app.use((req,res,next)=>{
+    if(!req.session.seller){
+        return next();
+    }
+Seller.findById(req.session.seller._id)
+        .then(seller=>{
+            if(!seller) {
+                 return next();
+            }
+            req.seller=seller;
+            next();
+        })
+        .catch(err => {
+            next(new Error(err));
+        });
+    
+});
+app.use((req, res, next) => {
+    res.locals.csrfToken = req.csrfToken();
+    res.locals.isAuthenticatedUser = req.session.isLoggedIn;
+    res.locals.isAuthenticatedSeller =  req.session.isSellerLoggedIn;
+    next();
+});
+app.use('/admin',adminRoutes);
 app.use(authRoutes);
-// app.get('/500',errorController.get505);
+app.use(shopRoutes);
+app.get('/500',errorController.get500);
 app.use(errorController.get404);
-
 app.use((error,req,res,next)=>{
-    console.log(error);
-    res.status(500).render('500', {
-        pageTitle: "Error!",
-        // path: '/500',
-        isAuthenticatedSeller:req.session.isSellerLoggedIn,
-        isAuthenticatedUser: req.session.isLoggedIn,
-    });
+   res.render('500');
 })
 
 

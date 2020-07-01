@@ -3,6 +3,7 @@ exports.get404 =(req,res,next)=>{
     {pageTitle :"404 : Page Not Found",path:'/400',
     isAuthenticatedUser : req.session.isLoggedIn,
     isAuthenticatedSeller : req.session.isSellerLoggedIn,
+    csrfToken:req.csrfToken()
 });
 };
 exports.get500 = (req,res,next)=>{
@@ -10,5 +11,6 @@ exports.get500 = (req,res,next)=>{
     {pageTitle :"Error!",path:'/500',
      isAuthenticatedUser : req.session.isLoggedIn,
      isAuthenticatedSeller : req.session.isSellerLoggedIn,
+     csrfToken:req.csrfToken()
 });
 };

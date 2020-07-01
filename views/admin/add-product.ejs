@@ -1,0 +1,75 @@
+<%- include('../includes/head.ejs') %>
+<link rel="stylesheet" href="/css/add-productform.css">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"> 
+</head>
+    <body>
+        <%- include('../includes/navigations.ejs') %>
+        <h3 class="title">Add Products</h3>
+        <hr>
+        <div class="container">
+            <div class="row">
+                <form class="col s11" action="/admin/add-product" method="POST" enctype="multipart/form-data">
+                    <div class="row">
+                        <div class="input-field col s6 push-s1">
+                        <input type="text" class="validate" id="prod_name" name="product_name">
+                        <label for="prod_name">Product Name</label>
+                        </div>
+                        <div class="input-field col s5 push-s1">
+                            <input type="text" class="validate" id="prod_price" name="price">
+                            <label for="prod_price" class="inplabe">Product Price</label> 
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s11 push-s1">
+                            <input type="text" class="validate" id="prod_desc" name="desc">
+                            <label for="prod_desc" class="inplabe">Description</label>
+                        </div>
+                    </div>
+                    <div class="row"> 
+                        <div class="input-field col s6 push-s1">
+                            <input type="text" class="validate" id="availability" name="avail">
+                            <label for="availability" class="inplabe">Product availability</label>
+                        </div>
+                        <div class="input-field col s5 push-s1">
+                            <input type="text" class="validate" id="cp" name="cost_price">
+                            <label for="cp" class="inplabe">Cost Price</label>
+                        </div>
+
+                    </div>
+                    <div class="row">
+                        <!-- <div class="file-field input-field col s5 push-s1">
+                            <div class="btn  red ">
+                              <span>Image 1</span>
+                              <input type="file" accept="image/*">
+                            </div>
+                            <div class="file-path-wrapper">
+                              <input class="file-path validate" type="text" placeholder="Image Upload #1">
+                            </div>
+                          </div> -->
+                          <div class="file-field input-field col s6 push-s1">
+                            <div class="btn orange darken-2">
+                              <span>Images</span>
+                              <input type="file" accept="image/*" name="image" multiple/>
+                            </div>
+                            <div class="file-path-wrapper">
+                              <input class="file-path validate" type="text" placeholder="Image Upload (min 2)">
+                            </div>
+                          </div>
+                    </div>
+                    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                    <div class="row">
+                    <button class="btn waves-effect waves-dark col s2 push-s5 orange darken-2 " type="submit" name="action">Add Product
+                      </button>
+                    </div>
+                  
+                </form>
+            </div>
+
+
+        </div>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    </body>
+    
+
+    </html>
