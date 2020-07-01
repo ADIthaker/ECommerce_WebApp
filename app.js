@@ -19,14 +19,15 @@ const store = new mongodbstore({
     collection: 'sessions',
 });
 
-
+app.use(express.static(path.join(__dirname, 'public')));
+app.use('/images',express.static(path.join(__dirname, 'images')));
 
 const fileStorage = multer.diskStorage({
     destination: (req, file, cb) => {
         cb(null, 'images');
     },
     filename: (req, file, cb) => {
-        cb(null, `${new Date().toISOString().replace(/:/g, '-')}${file.originalname.split(" ").join("_")}`);
+        cb(null,new Date().toISOString().replace(/:/g, '-') + '-' + file.originalname);
     },
 });
 
@@ -39,7 +40,7 @@ const fileFilter = (req, file, cb) => {
     }
 
 }
-app.use(express.static(path.join(__dirname, 'public')));
+
 app.use(bodyparser.urlencoded({extended:false}));
 app.use(multer({ storage: fileStorage, fileFilter: fileFilter}).array('image',2));
 
@@ -106,6 +107,7 @@ app.use(shopRoutes);
 app.get('/500',errorController.get500);
 app.use(errorController.get404);
 app.use((error,req,res,next)=>{
+    console.log(error);
    res.render('500');
 })
 

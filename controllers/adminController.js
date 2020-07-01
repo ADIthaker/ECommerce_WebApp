@@ -6,8 +6,28 @@ exports.getAddProducts=(req,res,next)=>{
     res.render('admin/add-product',{
         isAuthenticatedSeller : req.session.isSellerLoggedIn,
         isAuthenticatedUser : req.session.isLoggedIn,
-        csrfToken:req.csrfToken()
+        csrfToken:req.csrfToken(),
+        pageTitle:'Add Products',
     });
+}
+
+exports.getAdminProducts=(req,res,next)=>{
+    const name = req.seller.name;
+    Product.find({sellerId:req.seller._id})
+    .then(prods=>{
+            return res.render('admin/admin-products',{
+                products:prods,
+                pageTitle:`${name}'s Products`,
+         
+            })
+        
+        })
+    .catch(err=>{
+       
+        const error = new Error(err);
+        error.httpStatusCode=500;
+        return next(error);
+    })
 }
 
 exports.postAddProducts = (req,res,next)=>{
@@ -17,28 +37,32 @@ exports.postAddProducts = (req,res,next)=>{
     const avail = req.body.avail;
     const cp = req.body.cost_price;
     const images = req.files;
-    let imgurl =[];
-    imgUrl= images.map(img=>img.path);
+    let imgUrl = [];
+    images.forEach(img=>imgUrl.push({url:img.path}));
     const sellerId = req.seller._id;
     const product = new Product({
         name:name,
         availability:avail,
-        imageUrl:imgurl,
         description:desc,
-        price:price,
+        price:price, 
         costPrice:cp,
+        images:imgUrl,
         sellerId:sellerId
     })
     product.save()
     .then (result=>{
-        console.log(result);
+       
+       
         console.log("\nCreated Product");
-        res.redirect('/');
+       
+        res.redirect('/admin/products');
+        
     })
     .catch(err=>
         { 
-        console.log(err); 
-        
+            const error = new Error(err);
+            error.httpStatusCode=500;
+            return next(error);
     });
 
 }

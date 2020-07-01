@@ -1,0 +1,35 @@
+<%- include('../includes/head.ejs') %>
+<link rel="stylesheet" href="/css/prod-styles.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"> 
+</head>
+<body>
+    <%- include('../includes/navigations.ejs') %>
+    <h3 style="margin-left:1.5rem;margin-bottom:1.5rem;">Your Products</h3> 
+    <hr style="width:95%;align-items: center;">
+   <% if (products.length>0) { %>
+    <div class="row div-table">
+           <% for(product of products) { %>
+            <div class="col s4">
+            <div class="card">
+                <div class="card-image hover-zoom">
+                  <img src= "/<%= product.images[0].url %>">
+                  <span class="card-title" style="color:black"><%=product.name%></span>
+                </div>
+                <div class="card-content">
+                  <p><%= product.description%> </p>
+                </div>
+                <div class="card-content">
+                  <p><%= product.price %> </p>
+                </div>
+            </div>
+        </div>
+        <% } %>
+    </div>
+    <%} else {%>
+        <h5>No Products Found!!</h5>
+    <% } %>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+</body>
+
+
+</html>

@@ -13,10 +13,11 @@ const productSchema = new Schema({
         type: mongoose.SchemaTypes.ObjectId,
         required: true
     },
-    imageUrl: {
-        type: [String],
-        required: true
-    },
+    images:[{
+      url: { type:String,
+        required:true}
+       
+    }],
     description: {
         type: String,
         required: true

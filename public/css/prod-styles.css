@@ -1,0 +1,16 @@
+.hover-zoom {
+    background-color: black;
+    overflow: hidden; 
+    transform: scale(1.0);
+  }
+  
+ 
+.hover-zoom img {
+    transition: transform .5s ease;
+  }
+  
+ 
+  .hover-zoom:hover img {
+    transform: scale(1.1);
+    opacity:0.9;
+  }
