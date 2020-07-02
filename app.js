@@ -42,7 +42,7 @@ const fileFilter = (req, file, cb) => {
 }
 
 app.use(bodyparser.urlencoded({extended:false}));
-app.use(multer({ storage: fileStorage, fileFilter: fileFilter}).array('image',2));
+app.use(multer({ storage: fileStorage, fileFilter: fileFilter}).array('image',10));
 
 
 app.use(
@@ -77,7 +77,7 @@ User.findById(req.session.user._id)
         });
     
 });
-//have to move this above all reqs 
+
 app.use((req,res,next)=>{
     if(!req.session.seller){
         return next();
@@ -104,11 +104,13 @@ app.use((req, res, next) => {
 app.use('/admin',adminRoutes);
 app.use(authRoutes);
 app.use(shopRoutes);
-app.get('/500',errorController.get500);
+//app.get('/500',errorController.get500);
 app.use(errorController.get404);
 app.use((error,req,res,next)=>{
     console.log(error);
-   res.render('500');
+   res.render('500',{
+    pageTitle : "500 : Server Error",
+   });
 })
 
 

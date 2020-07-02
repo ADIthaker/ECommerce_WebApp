@@ -1,6 +1,7 @@
 <%- include('../includes/head.ejs') %>
 <link rel="stylesheet" href="/css/prod-styles.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"> 
+<title><%=pageTitle %></title>
 </head>
 <body>
     <%- include('../includes/navigations.ejs') %>
@@ -12,14 +13,16 @@
             <div class="col s4">
             <div class="card">
                 <div class="card-image hover-zoom">
-                  <img src= "/<%= product.images[0].url %>">
+                 <a href="/admin/product/<%= product._id%>"><img src= "/<%= product.images[0].url %>" height="300px"></a> 
                   <span class="card-title" style="color:black"><%=product.name%></span>
                 </div>
                 <div class="card-content">
+                  <p style="color:grey;">Description:</p>
                   <p><%= product.description%> </p>
                 </div>
                 <div class="card-content">
-                  <p><%= product.price %> </p>
+                  <p style="color:grey;">Price:</p>
+                  <p>$ <%= product.price %> </p>
                 </div>
             </div>
         </div>

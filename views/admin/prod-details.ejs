@@ -1,0 +1,126 @@
+<%- include('../includes/head.ejs') %>
+
+<link rel="stylesheet" href="/css/glider.css">
+
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="/css/main-carousel.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"> 
+<title><%=pageTitle %></title>
+</head>
+    <body>
+        <%- include('../includes/navigations.ejs') %>
+        <h4 style="margin-left: 2rem; text-transform: capitalize;"><%=name%></h4>
+        <hr style="width:95%;align-items:center;" />
+        <div class="row main-box" style="margin-left: 3.5rem;">
+            
+        <div class="glider-contain col s6">
+            <div class="glider">
+            <% for(imgurl of imgurls) {%>
+            <div class="item"> <img src="/<%= imgurl %>"></div> 
+            <% } %>
+        </div>
+        
+       <button aria-label="Previous" class="glider-prev">
+           <i class="fa fa-chevron-left"></i>
+       </button>
+  <button aria-label="Next" class="glider-next">
+    <i class="fa fa-chevron-right"></i>
+  </button>
+  <div role="tablist" class="dots"></div>
+  <div id="dots" class="glider-dots"></div>
+        </div>
+        <!-- copy the above for the product carousel -->
+        <div class="col s6">
+          <div class="row difftext">
+            <div class="col s12" >
+              Product Id : <%=prodId%><%=sellerId%>
+              <button class="btn grey lighten-4 cpybtn" data-clipboard-text="<%=prodId%><%=sellerId%>" style="transform: scale(0.7);">
+                <img src="https://img.icons8.com/metro/26/000000/copy.png"/>
+              </button>
+              <hr style="margin-right:2rem;">
+            </div>
+            
+          </div>
+            <div class="row difftext">
+            <div class="col s12" >
+              ShipperId : <%=sellerId%>
+              <button class="btn grey lighten-4 cpybtn" data-clipboard-text="<%=sellerId%>" style="transform: scale(0.7);">
+                <img src="https://img.icons8.com/metro/26/000000/copy.png"/>
+              </button>
+              <hr style="margin-right:2rem;">
+            </div>
+            
+          </div>
+            <div class="row difftext">
+              <div class="col s6" >
+               Selling Price : <%=price %> INR
+               <hr style="margin-right:2rem;">
+              </div>
+              <div class="col s6" >
+               Cost Price : <%=costPrice %> INR
+               <hr style="margin-right:2rem;">
+              </div>
+              
+              </div>
+              <div class="row difftext">
+                <div class="col s6" >
+                 Availability : <%=avail %> 
+                 <hr style="margin-right:2rem;">
+                </div>
+                <div class="col s6" >
+                Sold : <%=sold %> 
+                <hr style="margin-right:2rem;">
+                </div>
+                </div>
+                <div class="row difftext">
+                  <div class="col s12" >
+                    Description : <%=description%>
+                    <hr style="margin-right:2rem;">
+                  </div> 
+                </div>
+                <div class="row">
+                  <div class="col s6 push-s1" >
+                   
+                     <a href="/admin/edit-product/<%=prodId%>">
+                     <button class="btn orange darken-2"  type="submit">Edit Product</button>
+                    </a>
+                  </div> 
+                  <div class="col s push-s1" >
+                    <form action="/admin/deleteprod" method="POST">
+                      <input type="hidden" value="<%= prodId %>" name="prodId" />
+                      <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
+                      <button class="btn orange darken-2" type="submit">Delete Product</button>
+                     </form>
+                   </div> 
+                </div>
+
+        </div>
+       
+    </div>
+    <!-- for user product page copy all below this except the clipboard js -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+   <script src="/javascript/glider.js"></script>
+   <script>
+window.addEventListener('load', function(){
+    new Glider(document.querySelector('.glider'), {
+  slidesToShow: 1,
+  dots: '#dots',
+  draggable: true,
+  arrows: {
+    prev: '.glider-prev',
+    next: '.glider-next'
+  }
+});
+})
+   </script>
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js"></script>
+   <script>
+    var clipboard= new ClipboardJS('.cpybtn');
+    clipboard.on('success',function(e){
+      M.toast({html: 'Copied!',displayLength:400})
+    })
+   </script>
+<a href="https://icons8.com/icon/29/copy" target="_blank">Copy icon by Icons8</a>
+    </body>
+
+    </html>

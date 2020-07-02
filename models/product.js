@@ -29,6 +29,10 @@ const productSchema = new Schema({
     availability:{
         type:Number,
         requried:true
+    },
+    sold:{
+        type:Number,
+        requried:true
     }
     
     

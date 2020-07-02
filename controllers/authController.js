@@ -8,8 +8,8 @@ exports.getLogin = (req,res,next)=>{
     res.render('auths/login',{
         isAuthenticatedUser:req.session.isLoggedIn,
         isAuthenticatedSeller : req.session.isSellerLoggedIn,
-        csrfToken:req.csrfToken()
-        
+        csrfToken:req.csrfToken(),
+        pageTitle : "User Login",
      });
 }
 
@@ -37,7 +37,8 @@ exports.postLogin = (req,res,next)=>{
        return res.render('auths/login',{
         isAuthenticatedUser:req.session.isLoggedIn,
         isAuthenticatedSeller : req.session.isSellerLoggedIn,
-        csrfToken:req.csrfToken()
+        csrfToken:req.csrfToken(),
+        pageTitle :"User Login",
      });
    })
         
@@ -54,7 +55,8 @@ exports.getSignup =(req,res,next)=>{
     return res.render('auths/signup',{
         isAuthenticatedUser:req.session.isLoggedIn,
         isAuthenticatedSeller : req.session.isSellerLoggedIn,
-        csrfToken:req.csrfToken()
+        csrfToken:req.csrfToken(),
+        pageTitle :"Sign Up!"
      });
 }
 
@@ -90,7 +92,8 @@ exports.postSignup = (req,res,next)=>{
      return res.redirect('/',{
         isAuthenticatedUser:req.session.isLoggedIn,
         isAuthenticatedSeller : req.session.isSellerLoggedIn,
-        csrfToken:req.csrfToken()
+        csrfToken:req.csrfToken(),
+        pageTitle :"eMarket : Home",
      })
    
 }).catch(err=>{
@@ -158,7 +161,8 @@ exports.getSellerLogIn=(req,res,next)=>{
     res.render('auths/loginseller',{
         isAuthenticatedSeller : req.session.isSellerLoggedIn,
         isAuthenticatedUser:req.session.isLoggedIn,
-        csrfToken:req.csrfToken()
+        csrfToken:req.csrfToken(),
+        pageTitle :"Seller Login",
     });
 }
 
@@ -185,7 +189,8 @@ exports.postSellerLogIn = (req,res,next)=>{
        }
        return res.render('auths/loginseller',{
         isAuthenticatedUser:req.session.isLoggedIn,
-        isAuthenticatedSeller : req.session.isSellerLoggedIn, csrfToken:req.csrfToken()
+        isAuthenticatedSeller : req.session.isSellerLoggedIn, csrfToken:req.csrfToken(),
+        pageTitle :"Seller Login",
      });
    })
 })

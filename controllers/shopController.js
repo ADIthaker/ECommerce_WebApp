@@ -7,13 +7,15 @@ exports.getProducts = (req,res,next)=>{
    res.render('shop/products',{
       isAuthenticatedUser: req.session.isLoggedIn,
       isAuthenticatedSeller:req.session.isSellerLoggedIn,
-      csrfToken:req.csrfToken()
+      csrfToken:req.csrfToken(),
+      pageTitle:"Products",
    });
 }
 exports.getHome=(req, res, next) => {
    res.render('homepage',{
        isAuthenticatedUser:req.session.isLoggedIn,
        isAuthenticatedSeller:req.session.isSellerLoggedIn,
-       csrfToken:req.csrfToken()
+       csrfToken:req.csrfToken(),
+       pageTitle:"eMarket : Home",
     });
 }
