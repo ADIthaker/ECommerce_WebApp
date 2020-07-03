@@ -9,15 +9,17 @@ const mongoose = require('mongoose');
 const User = require('./models/user');
 const Seller = require('./models/seller');
 const errorController=require('./controllers/errorController');
-const MONGODB_URI = "mongodb+srv://Aditya:AoM18W3BFXbQ8ehG@cluster0-cws37.mongodb.net/test?retryWrites=true&w=majority";
+
 const multer = require('multer');
 const flash = require('connect-flash');
-
+const {mongo_uri} = require('./util/config');
 app.set('view engine', 'ejs');
+const MONGODB_URI = mongo_uri;
 const store = new mongodbstore({
     uri: MONGODB_URI,
     collection: 'sessions',
 });
+console.log(process.env.GOOGLE_API_KEY);
 
 app.use(express.static(path.join(__dirname, 'public')));
 app.use('/images',express.static(path.join(__dirname, 'images')));

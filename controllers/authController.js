@@ -11,7 +11,7 @@ exports.getLogin = (req,res,next)=>{
         csrfToken:req.csrfToken(),
         pageTitle : "User Login",
      });
-}
+} 
 
 exports.postLogin = (req,res,next)=>{
     const email = req.body.email;
@@ -116,7 +116,8 @@ exports.getSellerSignUp = (req,res,next)=>{
         res.render('auths/sellersignup',{
             isAuthenticatedUser:req.session.isLoggedIn,
             isAuthenticatedSeller : req.session.isSellerLoggedIn,
-            csrfToken:req.csrfToken()
+            csrfToken:req.csrfToken(),
+            pageTitle:"Join us",
         })
 }
 exports.postSellerSignup = (req,res,next)=>{
@@ -184,7 +185,7 @@ exports.postSellerLogIn = (req,res,next)=>{
            return req.session
            .save(err=>{
             console.log(err);
-            res.redirect('/');;
+            res.redirect('/admin/products');;
        });
        }
        return res.render('auths/loginseller',{

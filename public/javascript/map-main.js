@@ -1,8 +1,8 @@
 const mapArea = document.getElementById('map');
-
 const actionBtn = document.getElementById('showMe');
 const locationsAvailable = document.getElementById('locationList');
-const __KEY = 'AIzaSyBpv2swN80DWLD8U7ggxVHEwd0Ctzzm6FE';
+const __KEY ='AIzaSyBpv2swN80DWLD8U7ggxVHEwd0Ctzzm6FE';
+
 let Gmap;
 let Gmarker;
 
@@ -19,6 +19,7 @@ actionBtn.style.display = "none";
 getLocation = () => {
     // check if user's browser supports Navigator.geolocation
     if (navigator.geolocation) {
+      
       navigator.geolocation.getCurrentPosition(displayLocation, showError, options);
     } else {
      document.getElementsByClassName('msgs').innerHTML = 'Sorry failed to get location!😑😑';
@@ -87,6 +88,7 @@ getLocation = () => {
   }
   getGeolocation = (lat, lng) => {
     const latlng = lat + "," + lng;
+    
     fetch( `https://maps.googleapis.com/maps/api/geocode/json?latlng=${latlng}&key=${__KEY}` )
       .then(res => res.json())
      .then(data => populateCard(data.results));

@@ -145,7 +145,7 @@ exports.postEditProduct =(req,res,next)=>{
     let imgUrl=[];
     Product.findById(prodId).then(product=>{
         if(product.sellerId.toString() !== req.seller._id.toString()){
-           return res.redirect('/');
+           return res.redirect('/admin/products');
         }
        product.name = req.body.product_name;
        product.price =  req.body.price;

@@ -17,6 +17,8 @@ body {
     padding: 0 1.5rem;
     display: flex;
     align-items: center;
+    
+   
 }
 
 .main-hdr__nav{
@@ -26,6 +28,7 @@ body {
     background-color: #fc8c03;
     align-items: center;
     justify-content: space-between;
+   
 }
 
 .main-hdr__item-lst {
