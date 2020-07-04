@@ -1,0 +1,44 @@
+<%- include('../includes/head.ejs') %>
+<link rel="stylesheet" href="/css/prod-styles.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"> 
+<title><%=pageTitle %></title>
+</head>
+<body>
+    <%- include('../includes/navigations.ejs') %>
+    <h4 style="margin-left: 2rem; text-transform: capitalize;">Your Cart</h4>
+        <hr style="width:95%;align-items:center;" />
+    <% if (products.length>0) {%>
+    <div class="container" style="margin-top: 1.5rem;">
+    <ul class="collection">
+        <% for (prod of products) { %>
+        <li class="collection-item avatar">
+          <img src="/<%=prod.productId.images[0].url%>" alt="bruh" class="circle" style="transform: scale(1.5);margin-top:0.8rem;">
+          <span class="title" style="margin-left:12px ;">Product Name : <%=prod.productId.name%></span>
+          <p style="margin-left:12px ;">
+             
+              <br>
+              Quantity : <%=prod.quantity%>
+            
+          </p>
+        
+          <form action="/cart-delete-item" method="POST" class="secondary-content">
+            <input type="hidden" value="<%= prod.productId._id %>" name="productId">
+            <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+            <button class="btn orange darken-2 waves-effect waves-dark" type="submit">Delete</button>
+        </form>
+        </li>
+        <%}%>
+        </ul>
+        <form action="/checkout" style="position:relative;left:50%;transition:transform(-50%,-50%);" method="POST">
+            <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+            <button class="btn orange darken-2 waves-effect waves-dark" type="submit">Checkout</button>
+        </div>
+        <%} else {%>
+        <h6  style="margin-left: 2rem;"> Your cart is empty </h6>
+        <p  style="margin-left: 2rem;">Buy products  <a href="/">here</a></p>
+        <%}%>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+</body>
+
+
+</html>

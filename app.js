@@ -19,10 +19,10 @@ const store = new mongodbstore({
     uri: MONGODB_URI,
     collection: 'sessions',
 });
-console.log(process.env.GOOGLE_API_KEY);
+
 
 app.use(express.static(path.join(__dirname, 'public')));
-app.use('/images',express.static(path.join(__dirname, 'images')));
+app.use('/image',express.static(path.join(__dirname, 'image')));
 
 const fileStorage = multer.diskStorage({
     destination: (req, file, cb) => {
